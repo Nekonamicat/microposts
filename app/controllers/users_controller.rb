@@ -4,8 +4,10 @@ class UsersController < ApplicationController
     @users = User.order(id: :desc).page(params[:page]).per(20)
   end
 
-  def show
+   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.order(id: :desc).page(params[:page])
+    counts(@user)
   end
 
   def new
